@@ -39,7 +39,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     items = OrderItemSerializer(many=True, read_only=True)
-    total_price = serializers.SerializerMethodField(method_name="get_total_price")
+    total_price = serializers.SerializerMethodField(
+        method_name="get_total_price")
 
     def get_total_price(self, obj):
         order_items = obj.items.all()
@@ -55,3 +56,9 @@ class OrderSerializer(serializers.ModelSerializer):
             'items',
             'total_price',
         )
+
+
+class ProductInfoSerializer(serializers.Serializer):
+    products = ProductSerializer(many=True)
+    count = serializers.IntegerField()
+    max_price = serializers.FloatField()
