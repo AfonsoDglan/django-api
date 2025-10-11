@@ -5,19 +5,33 @@ from api.models import Product, Order
 from rest_framework.response import Response
 from django.db.models import Max
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import (IsAuthenticated,
+                                        IsAdminUser,
+                                        AllowAny)
 from rest_framework.views import APIView
 
 
-class ProductListAPIView(generics.ListAPIView):
-    queryset = Product.objects.exclude(stock__gt=0)
+class ProductListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
+    def get_permissions(self):
+        self.permission_classes = [AllowAny]
+        if self.request.method == 'POST':
+            self.permission_classes = [IsAdminUser]
+        return super().get_permissions()
 
-class ProductDetailAPIView(generics.RetrieveAPIView):
+
+class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     lookup_url_kwarg = 'product_id'
+
+    def get_permissions(self):
+        self.permission_classes = [AllowAny]
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            self.permission_classes = [IsAdminUser]
+        return super().get_permissions()
 
 
 class OrderListAPIView(generics.ListAPIView):
