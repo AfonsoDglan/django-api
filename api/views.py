@@ -1,6 +1,7 @@
 from api.serializers import (ProductSerializer,
                              OrderSerializer,
-                             ProductInfoSerializer)
+                             ProductInfoSerializer,
+                             OrderCreateSerializer)
 from api.models import Product, Order
 from rest_framework.response import Response
 from django.db.models import Max
@@ -62,21 +63,19 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
 
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'create' or self.action == 'update':
+            return OrderCreateSerializer
+        return super().get_serializer_class()
+
     def get_queryset(self):
         qs = super().get_queryset()
         if not self.request.user.is_staff:
             qs = qs.filter(user=self.request.user)
         return qs
-
-    @action(
-        detail=False,
-        methods=['get'],
-        url_path='user-orders',
-        )
-    def user_orders(self, request):
-        orders = self.get_queryset().filter(user=request.user)
-        serializer = self.get_serializer(orders, many=True)
-        return Response(serializer.data)
 
 
 # class OrderListAPIView(generics.ListAPIView):
