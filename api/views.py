@@ -43,11 +43,6 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
-    def get_queryset(self):
-        import time
-        time.sleep(2)
-        return super().get_queryset()
-
     def get_permissions(self):
         self.permission_classes = [AllowAny]
         if self.request.method == 'POST':

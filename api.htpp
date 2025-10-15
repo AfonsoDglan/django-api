@@ -19,7 +19,7 @@ DELETE http://localhost:8000/products/2/ HTTP/1.1
 
 POST http://localhost:8000/products/ HTTP/1.1
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNDE5NDQ2LCJpYXQiOjE3NjA0MTkxNDYsImp0aSI6IjYxMDkzYTRmZDA5YzQ0ODI5MzQyNTNhYmExNGI1NzY4IiwidXNlcl9pZCI6IjEifQ.-dXCZVWk4cp0J_InieQGxTMj_2B6Uo194Q-Ruu3J-qk
+Authorization: Bearer 
 
 {
     "name": "Television",
@@ -34,26 +34,26 @@ POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type:  application/json
 
 {
-    "username": "admin",
-    "password": "test"
+    "username": "",
+    "password": ""
 }
 
 ###
 GET http://localhost:8000/user-orders/ HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwMjEyMjY0LCJpYXQiOjE3NjAyMTE5NjQsImp0aSI6IjYwNzUzMDI5ZGRkYzRlNmViNmY2Mjc4Y2RlOWYxMTMwIiwidXNlcl9pZCI6IjEifQ.aTteIPbwahu_pk-U8-du_b_AtHO8H1lu3a2B8vXShYA
+Authorization: Bearer 
 
 ###
 POST http://localhost:8000/api/token/refresh/ HTTP/1.1
 Content-Type:  application/json
 
 {
-    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc2MDI5ODgyMiwiaWF0IjoxNzYwMjEyNDIyLCJqdGkiOiI3ODZmMzVhZWExYmM0ZTBiOTVlODlhODE1YjAzOTZhMCIsInVzZXJfaWQiOiIxIn0.WvAqGKGVDaQfb91yBj1HsXOoKHh6LfihfGV5LlNKHLk"
+    "refresh": ""
 }
 
 ###
 POST http://localhost:8000/orders/ HTTP/1.1
 Content-Type:  application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzYwNDExMzY3LCJpYXQiOjE3NjA0MTEwNjcsImp0aSI6IjE2MDlmOWVmMGIzMjQ5MWRhNTkzOGNmNzFiNjdlOWEwIiwidXNlcl9pZCI6IjEifQ.QEMZfmkVJD-u-g0nfmOz_9C7F_u-GHKoGgqfZ1jXVhY
+Authorization: Bearer 
 
 {
     "status": "Pending",
